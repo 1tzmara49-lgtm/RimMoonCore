@@ -1,0 +1,61 @@
+<Defs>
+  <ThingDef ParentName="DrugBase">
+    <defName>rm_hp_ampule</defName>
+    <label>HP ampule</label>
+    <description>A vial of yellowyish green liquid with an injector on the end. Produced and sold by K-CORP, these expensive drugs are capable of completely restoring any injury as long as the brain is intact. Advertised as a nanomachine based medicine, it's rumored that it's origin is a lot more grim.</description>
+    <possessionCount>1</possessionCount>
+    <stackLimit>3</stackLimit>
+    <descriptionHyperlinks><HediffDef>rm_ampule_regeneration</HediffDef></descriptionHyperlinks>
+    <graphicData>
+      <texPath>Things/Item/Drug/kcorpampule</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <drawSize>0.65</drawSize>
+    </graphicData>
+    <socialPropernessMatters>false</socialPropernessMatters>
+    <rotatable>false</rotatable>
+    <statBases>
+      <MarketValue>12000</MarketValue>
+      <Mass>0.005</Mass>
+      <Flammability>0.7</Flammability>
+    </statBases>
+    <techLevel>Industrial</techLevel>
+    <ingestible>
+      <foodType>Processed, Fluid</foodType>
+      <baseIngestTicks>100</baseIngestTicks>
+      <ingestSound>Ingest_Inject</ingestSound>
+      <drugCategory>Medical</drugCategory>
+      <outcomeDoers>
+        <li Class="IngestionOutcomeDoer_GiveHediff">
+          <hediffDef>rm_ampule_regeneration</hediffDef>
+          <severity>1.0</severity>
+        </li>
+      </outcomeDoers>
+    </ingestible>
+    <comps>
+      <li Class="CompProperties_Drug">
+        <listOrder>2000</listOrder>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <HediffDef>
+    <defName>rm_ampule_regeneration</defName>
+    <hediffClass>HediffWithComps</hediffClass>
+    <label>HP ampule regeneration</label>
+    <description>K-Corp ampule induced regeneration. For a brief period the pawn is regenerating every recent injury.</description>
+    <defaultLabelColor>(143, 249, 39)</defaultLabelColor>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <maxSeverity>1.0</maxSeverity>
+    <isBad>false</isBad>
+    <comps>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-20.0</severityPerDay>
+        <showHoursToRecover>true</showHoursToRecover>
+      </li>
+      <li Class="RimMoonCore.HediffCompProperties_Regeneration">
+          <intervalTicks>600</intervalTicks> <!-- Frequency of heals -->
+          <maxTickAge>6000</maxTickAge> <!-- Essentially every injury that is older than X ticks will be occluded by the regeneration-->
+      </li>
+    </comps>
+  </HediffDef>
+</Defs>
