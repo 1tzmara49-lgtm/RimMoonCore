@@ -1,0 +1,27 @@
+<Defs>
+  <ThingDef ParentName="ResourceBase">
+    <defName>rm_al_round</defName>
+    <label>Atelier logic round</label>
+    <description>A silver coloured bullet produced by atelier logic. Weapons produced by the said workshop have the ability to fire these specifically designed rounds to pulverize tougher opponents in battle. Incredibly costly to make.</description>
+    <graphicData>
+      <texPath>Things/Item/Resource/atelier_logic_ammo</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Standard_Drop</soundDrop>
+    <stackLimit>1</stackLimit>
+    <healthAffectsPrice>false</healthAffectsPrice>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <MarketValue>850</MarketValue>
+      <Mass>0.05</Mass>
+      <Flammability>0.8</Flammability>
+      <DeteriorationRate>2.0</DeteriorationRate>
+    </statBases>
+    <intricate>true</intricate>
+    <thingCategories>
+      <li>Manufactured</li>
+    </thingCategories>
+    <allowedArchonexusCount>10</allowedArchonexusCount>
+  </ThingDef>
+</Defs>

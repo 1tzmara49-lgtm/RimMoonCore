@@ -1,0 +1,102 @@
+<Defs>
+
+  <AbilityDef>
+    <defName>rm_pulverisation_round</defName>
+    <label>pulverisation round</label>
+    <description>Use a hemogenic chemical reaction to launch a bony spine at the target. The spine exits through the skin from an opening between the collarbones. Given the method of launch, it is surprisingly easy to aim.</description>
+    <iconPath>UI/Abilities/PiercingSpine</iconPath>
+    <cooldownTicksRange>60</cooldownTicksRange>
+    <displayOrder>200</displayOrder>
+    <aiCanUse>true</aiCanUse>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <range>3.9</range>
+      <warmupTime>0.5</warmupTime>
+      <soundCast>PiercingSpine_Launch</soundCast>
+    </verbProperties>
+  </AbilityDef>
+  
+  <ThingDef ParentName="BaseHumanMakeableGun" Name="rm_hv_railgun">
+    <defName>rm_hv_railgun</defName>
+    <label>High velocity railgun</label>
+    <description>A square barrelled rifle with a scope. Usually used by mid-level fixer offices to perform assassinations, but is useless against stronger opponents. Produced by Atelier Logic workshop, may fire empowered rounds by using their ammo.</description>
+    <graphicData>
+      <texPath>Things/Item/Equipment/WeaponRanged/hv_railgun</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.3</drawSize>
+    </graphicData>
+    <soundInteract>Interact_Rifle</soundInteract>
+    <weaponClasses>
+      <li>LongShots</li>
+      <li>RangedHeavy</li>
+    </weaponClasses>
+    <recipeMaker>
+      <researchPrerequisite>PrecisionRifling</researchPrerequisite>
+      <skillRequirements>
+        <Crafting>7</Crafting>
+      </skillRequirements>
+      <displayPriority>425</displayPriority>
+    </recipeMaker>
+    <thingSetMakerTags>
+      <li>RewardStandardQualitySuper</li>
+    </thingSetMakerTags>
+    <statBases>
+      <WorkToMake>60000</WorkToMake>
+      <Mass>4</Mass>
+      <AccuracyTouch>0.20</AccuracyTouch>
+      <AccuracyShort>0.50</AccuracyShort>
+      <AccuracyMedium>0.8</AccuracyMedium>
+      <AccuracyLong>0.85</AccuracyLong>
+      <RangedWeapon_Cooldown>3.0</RangedWeapon_Cooldown>
+    </statBases>
+    <!-- <costList>
+      <Steel>60</Steel>
+      <ComponentIndustrial>8</ComponentIndustrial>
+    </costList> -->
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>Bullet_SniperRifle</defaultProjectile>
+        <warmupTime>3.5</warmupTime>
+        <range>44.9</range>
+        <soundCast>Shot_SniperRifle</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>9</muzzleFlashScale>
+      </li>
+    </verbs>
+    <tools>
+      <li>
+        <label>stock</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>9</power>
+        <cooldownTime>2</cooldownTime>
+      </li>
+      <li>
+        <label>barrel</label>
+        <capacities>
+          <li>Blunt</li>
+          <li>Poke</li>
+        </capacities>
+        <power>9</power>
+        <cooldownTime>2</cooldownTime>
+      </li>
+    </tools>
+    <weaponTags Inherit="False">
+      <li>SniperRifle</li>
+    </weaponTags>
+    <comps>
+      <li Class="CompProperties_EquippableAbilityReloadable"> <!-- Props are populated by traits -->
+        <abilityDef>rm_pulverisation_round</abilityDef>
+        <maxCharges>1</maxCharges>
+        <soundReload>Standard_Reload</soundReload>
+        <chargeNoun>burner charge</chargeNoun>
+        <ammoDef>rm_al_round</ammoDef>
+        <ammoCountPerCharge>11</ammoCountPerCharge>
+        <baseReloadTicks>120</baseReloadTicks>
+      </li>
+    </comps>
+  </ThingDef>
+</Defs>
