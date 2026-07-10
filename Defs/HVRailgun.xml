@@ -1,21 +1,116 @@
 <Defs>
+  <!-- Sound defs -->
+
+  <SoundDef>
+    <defName>rm_hv_load</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>4</maxSimultaneous>
+    <sustain>True</sustain>
+    <priorityMode>PrioritizeNearest</priorityMode>
+    <subSounds>
+      <li>
+        <muteWhenPaused>True</muteWhenPaused>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>Equipment/hv_rifle_charge</clipPath>
+          </li>
+        </grains>
+        <volumeRange>30</volumeRange>
+        <distRange>10~30</distRange>
+
+        <sustainLoop>False</sustainLoop>
+        <repeatMode>NeverTwice</repeatMode>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+  <SoundDef>
+    <defName>rm_hv_fire</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>4</maxSimultaneous>
+    <priorityMode>PrioritizeNearest</priorityMode>
+    <subSounds>
+      <li>
+        <muteWhenPaused>True</muteWhenPaused>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>Equipment/hv_rifle_shot</clipPath>
+          </li>
+        </grains>
+        <volumeRange>30</volumeRange>
+        <distRange>10~30</distRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+  <SoundDef>
+    <defName>rm_pulverisation_round_fire</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>4</maxSimultaneous>
+    <priorityMode>PrioritizeNearest</priorityMode>
+    <subSounds>
+      <li>
+        <muteWhenPaused>True</muteWhenPaused>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>Ability/pulverisation_shot</clipPath>
+          </li>
+        </grains>
+        <volumeRange>30</volumeRange>
+        <distRange>10~30</distRange>
+
+      </li>
+    </subSounds>
+  </SoundDef>
+
+  <SoundDef>
+    <defName>rm_pulverisation_round_load</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>4</maxSimultaneous>
+    <priorityMode>PrioritizeNearest</priorityMode>
+    <sustain>True</sustain>
+    <subSounds>
+      <li>
+        <muteWhenPaused>True</muteWhenPaused>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>Ability/pulverisation_load</clipPath>
+          </li>
+        </grains>
+        <volumeRange>30</volumeRange>
+        <distRange>10~30</distRange>
+        
+        <sustainLoop>False</sustainLoop>
+        <repeatMode>NeverTwice</repeatMode>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+  <!-- Ability def for the pulverisation round -->
 
   <AbilityDef>
     <defName>rm_pulverisation_round</defName>
     <label>pulverisation round</label>
     <description>Use a hemogenic chemical reaction to launch a bony spine at the target. The spine exits through the skin from an opening between the collarbones. Given the method of launch, it is surprisingly easy to aim.</description>
     <iconPath>UI/Abilities/PiercingSpine</iconPath>
-    <cooldownTicksRange>60</cooldownTicksRange>
     <displayOrder>200</displayOrder>
     <aiCanUse>true</aiCanUse>
     <verbProperties>
       <verbClass>Verb_CastAbility</verbClass>
-      <range>3.9</range>
-      <warmupTime>0.5</warmupTime>
-      <soundCast>PiercingSpine_Launch</soundCast>
+      <range>80.0</range>
+      <warmupTime>10.0</warmupTime>
+      <soundAiming>rm_pulverisation_round_load</soundAiming>
+      <soundCast>rm_pulverisation_round_fire</soundCast>
     </verbProperties>
+    <comps>
+      <li Class="CompProperties_AbilityLaunchProjectile">
+        <projectileDef>PiercingSpine</projectileDef>
+      </li>
+    </comps>
   </AbilityDef>
   
+  <!-- The weapon itself -->
+
   <ThingDef ParentName="BaseHumanMakeableGun" Name="rm_hv_railgun">
     <defName>rm_hv_railgun</defName>
     <label>High velocity railgun</label>
@@ -30,24 +125,24 @@
       <li>LongShots</li>
       <li>RangedHeavy</li>
     </weaponClasses>
-    <recipeMaker>
+    <!-- <recipeMaker>
       <researchPrerequisite>PrecisionRifling</researchPrerequisite>
       <skillRequirements>
         <Crafting>7</Crafting>
       </skillRequirements>
       <displayPriority>425</displayPriority>
-    </recipeMaker>
+    </recipeMaker> -->
     <thingSetMakerTags>
       <li>RewardStandardQualitySuper</li>
     </thingSetMakerTags>
     <statBases>
-      <WorkToMake>60000</WorkToMake>
+      <!-- <WorkToMake>60000</WorkToMake> -->
       <Mass>4</Mass>
       <AccuracyTouch>0.20</AccuracyTouch>
       <AccuracyShort>0.50</AccuracyShort>
       <AccuracyMedium>0.8</AccuracyMedium>
       <AccuracyLong>0.85</AccuracyLong>
-      <RangedWeapon_Cooldown>3.0</RangedWeapon_Cooldown>
+      <RangedWeapon_Cooldown>2.0</RangedWeapon_Cooldown>
     </statBases>
     <!-- <costList>
       <Steel>60</Steel>
@@ -58,11 +153,12 @@
         <verbClass>Verb_Shoot</verbClass>
         <hasStandardCommand>true</hasStandardCommand>
         <defaultProjectile>Bullet_SniperRifle</defaultProjectile>
-        <warmupTime>3.5</warmupTime>
+        <warmupTime>5.5</warmupTime>
         <range>44.9</range>
-        <soundCast>Shot_SniperRifle</soundCast>
+        <soundAiming>rm_hv_load</soundAiming>
+        <soundCast>rm_hv_fire</soundCast>
         <soundCastTail>GunTail_Heavy</soundCastTail>
-        <muzzleFlashScale>9</muzzleFlashScale>
+        <muzzleFlashScale>3</muzzleFlashScale>
       </li>
     </verbs>
     <tools>
@@ -87,15 +183,22 @@
     <weaponTags Inherit="False">
       <li>SniperRifle</li>
     </weaponTags>
-    <comps>
-      <li Class="CompProperties_EquippableAbilityReloadable"> <!-- Props are populated by traits -->
+    <comps Inherit="False">
+      <li Class="CompProperties_EquippableAbilityReloadable">
         <abilityDef>rm_pulverisation_round</abilityDef>
         <maxCharges>1</maxCharges>
         <soundReload>Standard_Reload</soundReload>
         <chargeNoun>burner charge</chargeNoun>
         <ammoDef>rm_al_round</ammoDef>
-        <ammoCountPerCharge>11</ammoCountPerCharge>
         <baseReloadTicks>120</baseReloadTicks>
+        <ammoCountToRefill>1</ammoCountToRefill>
+        <replenishAfterCooldown>false</replenishAfterCooldown>
+      </li>
+      <li Class="CompProperties_Forbiddable"/>
+      <li Class="CompProperties_Styleable"/>
+      <li Class="CompProperties_Biocodable"/>
+      <li>
+        <compClass>CompQuality</compClass>
       </li>
     </comps>
   </ThingDef>
