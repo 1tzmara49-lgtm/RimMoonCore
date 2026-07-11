@@ -86,12 +86,50 @@
     </subSounds>
   </SoundDef>
 
+  <SoundDef>
+    <defName>rm_pulverisation_round_post</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>4</maxSimultaneous>
+    <priorityMode>PrioritizeNearest</priorityMode>
+    <subSounds>
+      <li>
+        <muteWhenPaused>True</muteWhenPaused>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>Ability/pulverisation_post</clipPath>
+          </li>
+        </grains>
+        <volumeRange>30</volumeRange>
+        <distRange>10~30</distRange>
+
+      </li>
+    </subSounds>
+  </SoundDef>
+
+  <!-- Pulverisation round -->
+
+   <ThingDef ParentName="BaseBullet">
+    <defName>rm_pulverisation_round_bullet</defName>
+    <label>pulverisation round</label>
+    <graphicData>
+      <texPath>Things/Projectile/rm_pulverisation_round_bullet</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <damageDef>RangedStab</damageDef>
+      <damageAmountBase>120</damageAmountBase>
+      <armorPenetrationBase>1</armorPenetrationBase>
+      <stoppingPower>1</stoppingPower>
+      <speed>80</speed>
+    </projectile>
+  </ThingDef>
+
   <!-- Ability def for the pulverisation round -->
 
   <AbilityDef>
     <defName>rm_pulverisation_round</defName>
     <label>pulverisation round</label>
-    <description>Use a hemogenic chemical reaction to launch a bony spine at the target. The spine exits through the skin from an opening between the collarbones. Given the method of launch, it is surprisingly easy to aim.</description>
+    <description>Charge up the atelier logic railgun and fire a pulverisation round. The bullet can travel extremely long ranges and deal immense damage to any target, but are extremely hard to produce and put a strain on the weapon.</description>
     <iconPath>UI/Abilities/PiercingSpine</iconPath>
     <displayOrder>200</displayOrder>
     <aiCanUse>true</aiCanUse>
@@ -101,10 +139,13 @@
       <warmupTime>10.0</warmupTime>
       <soundAiming>rm_pulverisation_round_load</soundAiming>
       <soundCast>rm_pulverisation_round_fire</soundCast>
+      <muzzleFlashScale>5</muzzleFlashScale>
+      <soundCastTail>rm_pulverisation_round_post</soundCastTail>
+      <minRange>30</minRange>
     </verbProperties>
     <comps>
       <li Class="CompProperties_AbilityLaunchProjectile">
-        <projectileDef>PiercingSpine</projectileDef>
+        <projectileDef>rm_pulverisation_round_bullet</projectileDef>
       </li>
     </comps>
   </AbilityDef>
@@ -114,7 +155,7 @@
   <ThingDef ParentName="BaseHumanMakeableGun" Name="rm_hv_railgun">
     <defName>rm_hv_railgun</defName>
     <label>High velocity railgun</label>
-    <description>A square barrelled rifle with a scope. Usually used by mid-level fixer offices to perform assassinations, but is useless against stronger opponents. Produced by Atelier Logic workshop, may fire empowered rounds by using their ammo.</description>
+    <description>A square barrelled rifle with a scope. Usually used by mid-level fixer offices and bookhunters to perform assassinations, but is useless against stronger opponents. Produced by Atelier Logic workshop, may fire empowered rounds by using their ammo.</description>
     <graphicData>
       <texPath>Things/Item/Equipment/WeaponRanged/hv_railgun</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -138,10 +179,10 @@
     <statBases>
       <!-- <WorkToMake>60000</WorkToMake> -->
       <Mass>4</Mass>
-      <AccuracyTouch>0.20</AccuracyTouch>
-      <AccuracyShort>0.50</AccuracyShort>
-      <AccuracyMedium>0.8</AccuracyMedium>
-      <AccuracyLong>0.85</AccuracyLong>
+      <AccuracyTouch>0.2</AccuracyTouch>
+      <AccuracyShort>0.3</AccuracyShort>
+      <AccuracyMedium>0.4</AccuracyMedium>
+      <AccuracyLong>0.65</AccuracyLong>
       <RangedWeapon_Cooldown>2.0</RangedWeapon_Cooldown>
     </statBases>
     <!-- <costList>
@@ -154,7 +195,7 @@
         <hasStandardCommand>true</hasStandardCommand>
         <defaultProjectile>Bullet_SniperRifle</defaultProjectile>
         <warmupTime>5.5</warmupTime>
-        <range>44.9</range>
+        <range>32.9</range>
         <soundAiming>rm_hv_load</soundAiming>
         <soundCast>rm_hv_fire</soundCast>
         <soundCastTail>GunTail_Heavy</soundCastTail>
